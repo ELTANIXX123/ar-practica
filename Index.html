@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Práctica Realidad Aumentada</title>
+
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+  <!-- AR.js -->
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.2.1/aframe/build/aframe-ar.js"></script>
+
+  <!-- Model Viewer -->
+  <script type="module"
+    src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    h2 {
+      text-align: center;
+      background: #222;
+      color: rgb(255, 40, 201);
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ================= A-FRAME ================= -->
+<section>
+  <h2>A-Frame – Figuras 3D</h2>
+
+  <a-scene embedded>
+    <a-camera position="0 1.6 4" rotation="-10 0 0"></a-camera>
+
+    <a-box position="-1 1 -3" color="red" rotation="0 45 0"></a-box>
+    <a-sphere position="1 1 -3" radius="0.6" color="blue"></a-sphere>
+    <a-cone position="0 1 -2" radius-bottom="0.7" radius-top="0" height="1.2" color="green"></a-cone>
+
+    <a-light type="ambient" color="#ffffff"></a-light>
+  </a-scene>
+</section>
+
+<!-- ================= AR.js MARCADOR ================= -->
+<section>
+  <h2>AR.js – Marcador HIRO</h2>
+
+  <a-scene embedded arjs>
+    <a-marker preset="hiro">
+      <a-box position="0 0.5 0" color="yellow" rotation="0 45 0"></a-box>
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+</section>
+
+<!-- ================= AR.js GEOLOCALIZACIÓN ================= -->
+<section>
+  <h2>AR.js – Geolocalización</h2>
+
+  <a-scene embedded arjs="sourceType: webcam; gpsMinDistance: 5;">
+    <a-box
+      gps-entity-place="latitude: 19.4326; longitude: -99.1332"
+      color="purple"
+      scale="2 2 2">
+    </a-box>
+
+    <a-camera gps-camera rotation-reader></a-camera>
+  </a-scene>
+</section>
+
+<!-- ================= MODEL VIEWER ================= -->
+<section>
+  <h2>Model Viewer – Modelo 3D Interactivo</h2>
+
+  <model-viewer
+    src="DamagedHelmet.glb"
+    alt="Modelo 3D interactivo"
+    camera-controls
+    auto-rotate
+    interaction-prompt="auto"
+    style="width: 100%; height: 500px;">
+  </model-viewer>
+</section>
+
+</body>
+</html>
